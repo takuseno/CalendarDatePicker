@@ -21,8 +21,6 @@ public class DayPickerView extends LinearLayout {
 
     private Context context;
 
-    private Calendar calendar;
-
     private LinearLayout prevSelectedLayout;
 
     public String weekday[] = {"Su","Mo","Tu","We","Th","Fr","St"};
@@ -189,7 +187,6 @@ public class DayPickerView extends LinearLayout {
                     wrapTextLayout.setBackgroundColor(Color.GRAY);
                     prevSelectedLayout = wrapTextLayout;
                     selectedDay = day;
-                    Toast.makeText(context,""+selectedDay,Toast.LENGTH_SHORT).show();
                 }
             });
         }

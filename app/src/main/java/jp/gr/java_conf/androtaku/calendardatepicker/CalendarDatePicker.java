@@ -13,28 +13,37 @@ import android.view.View;
  * Created by takuma on 2015/03/01.
  */
 public class CalendarDatePicker extends DialogFragment{
+    int year,month,day;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View content = inflater.inflate(R.layout.day_picker_layout,null);
-        DayPickerView dayPickerView = new DayPickerView(getActivity());
-        dayPickerView.setDayPickerView(0,0);
+        final DayPickerView dayPickerView = new DayPickerView(getActivity());
+        dayPickerView.setDayPickerView(year, month);
 
         builder.setView(dayPickerView)
                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        day = dayPickerView.getDayOfMonth();
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+
                     }
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setDate(int year,int month){
+        this.year = year;
+        this.month = month;
+    }
+
+    public int getDayOfMonth(){
+        return day;
     }
 }
