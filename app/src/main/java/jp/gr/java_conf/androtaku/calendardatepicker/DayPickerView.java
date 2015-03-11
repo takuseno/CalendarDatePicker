@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -47,16 +46,18 @@ public class DayPickerView extends LinearLayout {
         this.context = context;
     }
 
-    public void setDayPickerView(int year,int month){
+    public void setDayPickerView(){
         final Calendar calendar = Calendar.getInstance();
-        if(year != 0 & month != 0) {
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month - 1);
+        if(selectedYear == 0 || selectedMonth == 0) {
+            selectedYear = calendar.get(Calendar.YEAR);
+            selectedMonth = calendar.get(Calendar.MONTH) + 1;
         }
+        else{
+            calendar.set(Calendar.YEAR,selectedYear);
+            calendar.set(Calendar.MONTH,selectedMonth - 1);
+        }
+        //set date as the first day of month
         calendar.set(Calendar.DAY_OF_MONTH,1);
-
-        selectedYear = calendar.get(Calendar.YEAR);
-        selectedMonth = calendar.get(Calendar.MONTH) + 1;
 
         setOrientation(VERTICAL);
 
@@ -79,7 +80,9 @@ public class DayPickerView extends LinearLayout {
                     selectedMonth = 12;
                     --selectedYear;
                 }
-                setDayPickerView(selectedYear,selectedMonth);
+                setYear(selectedYear);
+                setMonth(selectedMonth);
+                setDayPickerView();
             }
         });
         Button nextButton = new Button(context);
@@ -93,7 +96,9 @@ public class DayPickerView extends LinearLayout {
                     selectedMonth = 1;
                     ++selectedYear;
                 }
-                setDayPickerView(selectedYear,selectedMonth);
+                setYear(selectedYear);
+                setMonth(selectedMonth);
+                setDayPickerView();
             }
         });
 
@@ -190,6 +195,10 @@ public class DayPickerView extends LinearLayout {
                 }
             });
         }
+        if(selectedDay == day){
+            wrapTextLayout.setBackgroundColor(Color.GRAY);
+            prevSelectedLayout = wrapTextLayout;
+        }
         LinearLayout.LayoutParams wrapLayoutParams
                 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         wrapLayoutParams.weight = 1.0f;
@@ -203,5 +212,16 @@ public class DayPickerView extends LinearLayout {
     public int getDayOfMonth(){
         return selectedDay;
     }
+    public int getYear(){return selectedYear;}
+    public int getMonth(){return selectedMonth;}
 
+    public void setDayOfMonth(int dayOfMonth){
+        selectedDay = dayOfMonth;
+    }
+    public void setYear(int year){
+        selectedYear = year;
+    }
+    public void setMonth(int month){
+        selectedMonth = month;
+    }
 }

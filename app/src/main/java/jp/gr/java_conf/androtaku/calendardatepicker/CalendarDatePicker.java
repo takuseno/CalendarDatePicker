@@ -2,33 +2,32 @@ package jp.gr.java_conf.androtaku.calendardatepicker;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.Context;
+import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 
 /**
  * Created by takuma on 2015/03/01.
  */
 public class CalendarDatePicker extends DialogFragment{
-    int year,month,day;
+    int year,month,dayOfMonth;
+    private DialogInterface.OnClickListener okClickListener = null;
+    DayPickerView dayPickerView;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        final DayPickerView dayPickerView = new DayPickerView(getActivity());
-        dayPickerView.setDayPickerView(year, month);
+        dayPickerView = new DayPickerView(getActivity());
+        dayPickerView.setYear(year);
+        dayPickerView.setMonth(month);
+        dayPickerView.setDayOfMonth(dayOfMonth);
+        dayPickerView.setDayPickerView();
 
         builder.setView(dayPickerView)
-               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        day = dayPickerView.getDayOfMonth();
-                    }
-                })
+                .setPositiveButton("OK", okClickListener)
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
@@ -38,12 +37,23 @@ public class CalendarDatePicker extends DialogFragment{
         return builder.create();
     }
 
-    public void setDate(int year,int month){
+    public void setOnOkClickListener(DialogInterface.OnClickListener listener) {
+        this.okClickListener = listener;
+    }
+
+    public void setDate(int year,int month,int dayOfMonth){
         this.year = year;
         this.month = month;
+        this.dayOfMonth = dayOfMonth;
     }
 
     public int getDayOfMonth(){
-        return day;
+        return dayPickerView.getDayOfMonth();
+    }
+    public int getYear(){
+        return dayPickerView.getYear();
+    }
+    public int getMonth(){
+        return dayPickerView.getMonth();
     }
 }
