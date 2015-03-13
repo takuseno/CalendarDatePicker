@@ -2,6 +2,8 @@ package jp.gr.java_conf.androtaku.calendardatepicker;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -47,6 +49,9 @@ public class DayPickerView extends LinearLayout {
     }
 
     public void setDayPickerView(){
+        //set padding to this layout
+        this.setPadding(10,20,10,20);
+
         final Calendar calendar = Calendar.getInstance();
         if(selectedYear == 0 || selectedMonth == 0) {
             selectedYear = calendar.get(Calendar.YEAR);
@@ -70,13 +75,13 @@ public class DayPickerView extends LinearLayout {
         topLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         Button previousButton = new Button(context);
-        previousButton.setText("←");
+        previousButton.setText("Prev");
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeAllViews();
                 --selectedMonth;
-                if(selectedMonth == 0){
+                if (selectedMonth == 0) {
                     selectedMonth = 12;
                     --selectedYear;
                 }
@@ -86,7 +91,7 @@ public class DayPickerView extends LinearLayout {
             }
         });
         Button nextButton = new Button(context);
-        nextButton.setText("→");
+        nextButton.setText("Next");
         nextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +186,11 @@ public class DayPickerView extends LinearLayout {
     }
 
     private LinearLayout wrapText(TextView textView, final int day){
+        //selected background
+        final GradientDrawable drawable = new GradientDrawable();
+        drawable.setCornerRadius(20);
+        drawable.setColor(Color.parseColor("#66AAAAAA"));
+
         final LinearLayout wrapTextLayout = new LinearLayout(context);
         if(day != -1){
             wrapTextLayout.setOnClickListener(new OnClickListener() {
@@ -189,14 +199,24 @@ public class DayPickerView extends LinearLayout {
                     if(prevSelectedLayout != null){
                         prevSelectedLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     }
-                    wrapTextLayout.setBackgroundColor(Color.GRAY);
+                    if(Build.VERSION.SDK_INT < 16) {
+                        wrapTextLayout.setBackgroundDrawable(drawable);
+                    }
+                    else{
+                        wrapTextLayout.setBackground(drawable);
+                    }
                     prevSelectedLayout = wrapTextLayout;
                     selectedDay = day;
                 }
             });
         }
         if(selectedDay == day){
-            wrapTextLayout.setBackgroundColor(Color.GRAY);
+            if(Build.VERSION.SDK_INT < 16) {
+                wrapTextLayout.setBackgroundDrawable(drawable);
+            }
+            else{
+                wrapTextLayout.setBackground(drawable);
+            }
             prevSelectedLayout = wrapTextLayout;
         }
         LinearLayout.LayoutParams wrapLayoutParams
@@ -212,8 +232,12 @@ public class DayPickerView extends LinearLayout {
     public int getDayOfMonth(){
         return selectedDay;
     }
-    public int getYear(){return selectedYear;}
-    public int getMonth(){return selectedMonth;}
+    public int getYear(){
+        return selectedYear;
+    }
+    public int getMonth(){
+        return selectedMonth;
+    }
 
     public void setDayOfMonth(int dayOfMonth){
         selectedDay = dayOfMonth;
