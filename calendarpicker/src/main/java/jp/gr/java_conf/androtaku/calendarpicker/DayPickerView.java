@@ -1,4 +1,4 @@
-package jp.gr.java_conf.androtaku.calendardatepicker;
+package jp.gr.java_conf.androtaku.calendarpicker;
 
 import android.content.Context;
 import android.graphics.Color;

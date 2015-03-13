@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import jp.gr.java_conf.androtaku.calendardatepicker.CalendarDatePicker;
+import jp.gr.java_conf.androtaku.calendarpicker.CalendarPicker;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,8 +21,8 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CalendarDatePicker dialog = new CalendarDatePicker();
-                dialog.show(getFragmentManager(),"calendar");
+                CalendarPicker dialog = new CalendarPicker();
+                dialog.show(getSupportFragmentManager(),"calendar");
             }
         });
     }

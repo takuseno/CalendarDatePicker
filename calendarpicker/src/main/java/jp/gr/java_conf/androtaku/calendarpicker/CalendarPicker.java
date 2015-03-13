@@ -1,4 +1,4 @@
-package jp.gr.java_conf.androtaku.calendardatepicker;
+package jp.gr.java_conf.androtaku.calendarpicker;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +9,7 @@ import android.os.Bundle;
 /**
  * Created by takuma on 2015/03/01.
  */
-public class CalendarDatePicker extends DialogFragment{
+public class CalendarPicker extends DialogFragment{
     int year,month,dayOfMonth;
     private DialogInterface.OnClickListener okClickListener = null;
     DayPickerView dayPickerView;
