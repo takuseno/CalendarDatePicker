@@ -12,7 +12,7 @@ import android.os.Bundle;
 public class CalendarPicker extends DialogFragment{
     int year,month,dayOfMonth;
     private DialogInterface.OnClickListener okClickListener = null;
-    DayPickerView dayPickerView;
+    ParentView parentView;
 
 
     @Override
@@ -20,13 +20,13 @@ public class CalendarPicker extends DialogFragment{
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        dayPickerView = new DayPickerView(getActivity());
-        dayPickerView.setYear(year);
-        dayPickerView.setMonth(month);
-        dayPickerView.setDayOfMonth(dayOfMonth);
-        dayPickerView.setDayPickerView();
+        parentView = new ParentView(getActivity());
+        parentView.setYear(year);
+        parentView.setMonth(month);
+        parentView.setDayOfMonth(dayOfMonth);
+        parentView.setDayPickerView();
 
-        builder.setView(dayPickerView)
+        builder.setView(parentView)
                 .setPositiveButton("OK", okClickListener)
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -48,12 +48,12 @@ public class CalendarPicker extends DialogFragment{
     }
 
     public int getDayOfMonth(){
-        return dayPickerView.getDayOfMonth();
+        return parentView.getDayOfMonth();
     }
     public int getYear(){
-        return dayPickerView.getYear();
+        return parentView.getYear();
     }
     public int getMonth(){
-        return dayPickerView.getMonth();
+        return parentView.getMonth();
     }
 }
