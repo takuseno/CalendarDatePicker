@@ -1,11 +1,14 @@
 package jp.gr.java_conf.androtaku.example;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import jp.gr.java_conf.androtaku.calendarpicker.CalendarPicker;
 
@@ -21,8 +24,26 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CalendarPicker dialog = new CalendarPicker();
-                dialog.show(getSupportFragmentManager(),"calendar");
+                final CalendarPicker calendarPicker = new CalendarPicker();
+                calendarPicker.setOnOkClickListener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String date = "" + calendarPicker.getYear()
+                                    + "/" + calendarPicker.getMonth()
+                                    + "/" + calendarPicker.getDayOfMonth();
+                        Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
+                    }
+                });
+                calendarPicker.show(getSupportFragmentManager(),"calendar");
+            }
+        });
+
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this,null,2014,4,23);
+        Button button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
             }
         });
     }

@@ -44,14 +44,25 @@ public class DayPickerView extends BaseView {
         this.setPadding(10,10,10,10);
 
         final Calendar calendar = Calendar.getInstance();
-        if(selectedYear == 0 || selectedMonth == 0) {
+        //set year value
+        if(selectedYear <= 0) {
             selectedYear = calendar.get(Calendar.YEAR);
-            selectedMonth = calendar.get(Calendar.MONTH) + 1;
         }
         else{
             calendar.set(Calendar.YEAR,selectedYear);
+        }
+        //set month value
+        if(selectedMonth < 1 || selectedMonth > 12){
+            selectedMonth = calendar.get(Calendar.MONTH) + 1;
+        }
+        else{
             calendar.set(Calendar.MONTH,selectedMonth - 1);
         }
+        //set day of month value
+        if(selectedDay < 1 || selectedDay > 31){
+            selectedDay = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
         //set date as the first day of month
         calendar.set(Calendar.DAY_OF_MONTH,1);
 

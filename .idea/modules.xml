@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CalendarDatePicker.iml" filepath="$PROJECT_DIR$/CalendarDatePicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CalendarPicker.iml" filepath="$PROJECT_DIR$/CalendarPicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calendarpicker/calendarpicker.iml" filepath="$PROJECT_DIR$/calendarpicker/calendarpicker.iml" />
     </modules>
