@@ -4,13 +4,11 @@ Library of date picker dialog for Android
 ##Usage
 Import /calendarpicker as a module
 ```java
-final CalendarPicker calendarPicker = new CalendarPicker();
-calendarPicker.setOnOkClickListener(new DialogInterface.OnClickListener() {
+CalendarPicker calendarPicker = new CalendarPicker();
+calendarPicker.setDateSelectedListenr(new DateSelectedListener() {
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        String date = "" + calendarPicker.getYear()
-                    + "/" + calendarPicker.getMonth()
-                    + "/" + calendarPicker.getDayOfMonth();
+    public void onDateSelectedListener(int year, int month, int dayOfMonth) {
+        String date = "" + year+ "/" + month + "/" + dayOfMonth;
         Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
     }
 });
