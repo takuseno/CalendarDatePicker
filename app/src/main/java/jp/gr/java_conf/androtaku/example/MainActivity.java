@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import jp.gr.java_conf.androtaku.calendarpicker.CalendarPicker;
+import jp.gr.java_conf.androtaku.calendarpicker.DateSelectedListener;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,12 +26,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 final CalendarPicker calendarPicker = new CalendarPicker();
-                calendarPicker.setOnOkClickListener(new DialogInterface.OnClickListener() {
+                calendarPicker.setDateSelectedListenr(new DateSelectedListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String date = "" + calendarPicker.getYear()
-                                    + "/" + calendarPicker.getMonth()
-                                    + "/" + calendarPicker.getDayOfMonth();
+                    public void onDateSelectedListener(int year, int month, int dayOfMonth) {
+                        String date = "" + year+ "/" + month + "/" + dayOfMonth;
                         Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
                     }
                 });
