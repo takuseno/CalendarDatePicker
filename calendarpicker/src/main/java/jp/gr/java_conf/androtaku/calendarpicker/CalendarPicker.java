@@ -16,6 +16,7 @@ public class CalendarPicker extends DialogFragment{
 
     public static final int SELECT_DAY_OF_MONTH = 1;
     public static final int SELECT_MONTH = 2;
+    public static final int SELECT_YEAR = 3;
     private int minSelect;
 
     @Override
@@ -37,6 +38,9 @@ public class CalendarPicker extends DialogFragment{
                 break;
             case SELECT_MONTH:
                 parentView.setMonthPickerView();
+                break;
+            case SELECT_YEAR:
+                parentView.setYearPickerView();
                 break;
         }
 
@@ -63,7 +67,7 @@ public class CalendarPicker extends DialogFragment{
     }
 
     public void setMinSelect(int level){
-        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH){
+        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH || level == SELECT_YEAR){
             minSelect = level;
         }
     }

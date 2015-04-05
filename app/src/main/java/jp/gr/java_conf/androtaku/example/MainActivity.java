@@ -25,7 +25,8 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CalendarPicker calendarPicker = new CalendarPicker();
+                CalendarPicker calendarPicker = new CalendarPicker();
+                calendarPicker.setDate(2014,4,23);
                 calendarPicker.setDateSelectedListenr(new DateSelectedListener() {
                     @Override
                     public void onDateSelectedListener(int year, int month, int dayOfMonth) {

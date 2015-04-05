@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -67,6 +66,9 @@ public class DayPickerView extends BaseView {
         calendar.set(Calendar.DAY_OF_MONTH,1);
 
         setOrientation(VERTICAL);
+        LinearLayout.LayoutParams parentLayoutParams
+                = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        setLayoutParams(parentLayoutParams);
 
         //Top Layout
         LinearLayout.LayoutParams layoutParams
@@ -87,8 +89,8 @@ public class DayPickerView extends BaseView {
                     selectedMonth = 12;
                     --selectedYear;
                 }
-                setYear(selectedYear);
-                setMonth(selectedMonth);
+                parentView.setYear(selectedYear);
+                parentView.setMonth(selectedMonth);
                 setDayPickerView();
             }
         });
@@ -103,8 +105,8 @@ public class DayPickerView extends BaseView {
                     selectedMonth = 1;
                     ++selectedYear;
                 }
-                setYear(selectedYear);
-                setMonth(selectedMonth);
+                parentView.setYear(selectedYear);
+                parentView.setMonth(selectedMonth);
                 setDayPickerView();
             }
         });
@@ -213,7 +215,7 @@ public class DayPickerView extends BaseView {
         drawable.setCornerRadius(20);
         drawable.setColor(Color.parseColor("#00bcd4"));
 
-        final LinearLayout wrapTextLayout = new LinearLayout(context);
+        final SquareLayout wrapTextLayout = new SquareLayout(context);
         if(day != -1){
             wrapTextLayout.setOnClickListener(new OnClickListener() {
                 @Override
@@ -246,9 +248,9 @@ public class DayPickerView extends BaseView {
             prevSelectedLayout = wrapTextLayout;
         }
         LinearLayout.LayoutParams wrapLayoutParams
-                = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         wrapLayoutParams.weight = 1.0f;
-        wrapTextLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+        wrapTextLayout.setGravity(Gravity.CENTER);
         wrapTextLayout.setLayoutParams(wrapLayoutParams);
         wrapTextLayout.addView(textView);
 

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,12 +62,30 @@ public class MonthPickerView extends BaseView{
         }
 
         setOrientation(VERTICAL);
+        LinearLayout.LayoutParams parentLayoutParams
+                = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        setLayoutParams(parentLayoutParams);
 
         //date text
         final TextView topText = new TextView(context);
         topText.setTextColor(Color.BLACK);
         topText.setText("" + selectedYear);
         topText.setTextSize(20);
+        if(parentView != null) {
+            //set selectable background to date text
+            TypedValue selectableBackground = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, selectableBackground, true);
+            topText.setBackgroundResource(selectableBackground.resourceId);
+            topText.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    parentView.setYear(selectedYear);
+                    parentView.setMonth(selectedMonth);
+                    parentView.setDayOfMonth(selectedDay);
+                    parentView.setYearPickerView();
+                }
+            });
+        }
 
         //Top Layout
         LinearLayout.LayoutParams layoutParams
@@ -82,7 +101,7 @@ public class MonthPickerView extends BaseView{
             @Override
             public void onClick(View v) {
                 --selectedYear;
-                setYear(selectedYear);
+                parentView.setYear(selectedYear);
                 topText.setText("" + selectedYear);
             }
         });
@@ -92,7 +111,7 @@ public class MonthPickerView extends BaseView{
             @Override
             public void onClick(View v) {
                 ++selectedYear;
-                setYear(selectedYear);
+                parentView.setYear(selectedYear);
                 topText.setText("" + selectedYear);
             }
         });
@@ -137,7 +156,7 @@ public class MonthPickerView extends BaseView{
         final GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadius(20);
         drawable.setColor(Color.parseColor("#00bcd4"));
-        final LinearLayout wrapTextLayout = new LinearLayout(context);
+        final SquareLayout wrapTextLayout = new SquareLayout(context);
         wrapTextLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +192,7 @@ public class MonthPickerView extends BaseView{
         LinearLayout.LayoutParams wrapLayoutParams
                 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         wrapLayoutParams.weight = 1.0f;
-        wrapTextLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+        wrapTextLayout.setGravity(Gravity.CENTER);
         wrapTextLayout.setLayoutParams(wrapLayoutParams);
         wrapTextLayout.addView(textView);
 

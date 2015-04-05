@@ -17,6 +17,7 @@ public class ParentView extends LinearLayout {
 
     public static final int SELECT_DAY_OF_MONTH = 1;
     public static final int SELECT_MONTH = 2;
+    public static final int SELECT_YEAR = 3;
     private int minSelect;
 
     public ParentView(Context context){
@@ -56,14 +57,27 @@ public class ParentView extends LinearLayout {
     }
 
     public void setMonthPickerView(){
+        if(minSelect == SELECT_MONTH || minSelect == SELECT_DAY_OF_MONTH) {
+            removeAllViews();
+            MonthPickerView monthPickerView = new MonthPickerView(context);
+            monthPickerView.setYear(selectedYear);
+            monthPickerView.setMonth(selectedMonth);
+            monthPickerView.setDayOfMonth(selectedDay);
+            monthPickerView.setParentView(this);
+            monthPickerView.setMonthPickerView();
+            addView(monthPickerView);
+        }
+    }
+
+    public void setYearPickerView(){
         removeAllViews();
-        MonthPickerView monthPickerView = new MonthPickerView(context);
-        monthPickerView.setYear(selectedYear);
-        monthPickerView.setMonth(selectedMonth);
-        monthPickerView.setDayOfMonth(selectedDay);
-        monthPickerView.setParentView(this);
-        monthPickerView.setMonthPickerView();
-        addView(monthPickerView);
+        YearPickerView yearPickerView = new YearPickerView(context);
+        yearPickerView.setYear(selectedYear);
+        yearPickerView.setMonth(selectedMonth);
+        yearPickerView.setDayOfMonth(selectedDay);
+        yearPickerView.setParentView(this);
+        yearPickerView.setYearPickerView();
+        addView(yearPickerView);
     }
 
     public int getDayOfMonth(){
@@ -87,7 +101,7 @@ public class ParentView extends LinearLayout {
     }
 
     public void setMinSelect(int level){
-        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH){
+        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH || level == SELECT_YEAR){
             minSelect = level;
         }
     }
