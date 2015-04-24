@@ -15,6 +15,9 @@ calendarPicker.setDateSelectedListenr(new DateSelectedListener() {
 calendarPicker.show(getSupportFragmentManager(),"calendar");
 ```
 ##Screenshots
-![day](screenshots/day.jpg)
-![day](screenshots/month.jpg)
+<p>
+    <img src="screenshots/day.jpg" alt="day" width="270" height="480"/>
+    <img src="screenshots/month.jpg" alt="month" width="270" height="480"/>
+    <img src="screenshots/year.jpg" alt="year" width="270" height="480"/>
+</p>
 
