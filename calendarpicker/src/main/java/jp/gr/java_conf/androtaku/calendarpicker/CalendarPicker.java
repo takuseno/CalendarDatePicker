@@ -14,10 +14,7 @@ public class CalendarPicker extends DialogFragment{
     private DateSelectedListener dateSelectedListener = null;
     ParentView parentView;
 
-    public static final int SELECT_DAY_OF_MONTH = 1;
-    public static final int SELECT_MONTH = 2;
-    public static final int SELECT_YEAR = 3;
-    private int minSelect;
+    private SelectMode mode = SelectMode.DAY_OF_MONTH;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,18 +25,16 @@ public class CalendarPicker extends DialogFragment{
         parentView.setYear(year);
         parentView.setMonth(month);
         parentView.setDayOfMonth(dayOfMonth);
-        if(minSelect == 0){
-            minSelect = SELECT_DAY_OF_MONTH;
-        }
-        parentView.setMinSelect(minSelect);
-        switch(minSelect){
-            case SELECT_DAY_OF_MONTH:
+
+        parentView.setSelectMode(mode);
+        switch(mode){
+            case DAY_OF_MONTH:
                 parentView.setDayPickerView();
                 break;
-            case SELECT_MONTH:
+            case MONTH:
                 parentView.setMonthPickerView();
                 break;
-            case SELECT_YEAR:
+            case YEAR:
                 parentView.setYearPickerView();
                 break;
         }
@@ -66,10 +61,8 @@ public class CalendarPicker extends DialogFragment{
         this.dayOfMonth = dayOfMonth;
     }
 
-    public void setMinSelect(int level){
-        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH || level == SELECT_YEAR){
-            minSelect = level;
-        }
+    public void setSelectMode(SelectMode mode){
+        this.mode = mode;
     }
 
     public int getDayOfMonth(){
