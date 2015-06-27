@@ -15,10 +15,7 @@ public class ParentView extends LinearLayout {
     private int selectedDay;
     private int selectedYear,selectedMonth;
 
-    public static final int SELECT_DAY_OF_MONTH = 1;
-    public static final int SELECT_MONTH = 2;
-    public static final int SELECT_YEAR = 3;
-    private int minSelect;
+    private SelectMode mode = SelectMode.DAY_OF_MONTH;
 
     public ParentView(Context context){
         super(context);
@@ -44,7 +41,7 @@ public class ParentView extends LinearLayout {
     }
 
     public void setDayPickerView(){
-        if(minSelect == SELECT_DAY_OF_MONTH) {
+        if(mode == SelectMode.DAY_OF_MONTH) {
             removeAllViews();
             DayPickerView dayPickerView = new DayPickerView(context);
             dayPickerView.setYear(selectedYear);
@@ -57,7 +54,7 @@ public class ParentView extends LinearLayout {
     }
 
     public void setMonthPickerView(){
-        if(minSelect == SELECT_MONTH || minSelect == SELECT_DAY_OF_MONTH) {
+        if(mode != SelectMode.YEAR) {
             removeAllViews();
             MonthPickerView monthPickerView = new MonthPickerView(context);
             monthPickerView.setYear(selectedYear);
@@ -100,9 +97,7 @@ public class ParentView extends LinearLayout {
         selectedMonth = month;
     }
 
-    public void setMinSelect(int level){
-        if(level == SELECT_DAY_OF_MONTH || level == SELECT_MONTH || level == SELECT_YEAR){
-            minSelect = level;
-        }
+    public void setSelectMode(SelectMode mode){
+        this.mode = mode;
     }
 }

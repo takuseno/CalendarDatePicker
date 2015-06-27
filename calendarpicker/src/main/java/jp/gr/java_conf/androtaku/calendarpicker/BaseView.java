@@ -16,8 +16,8 @@ public class BaseView extends LinearLayout {
     //parent view
     public ParentView parentView;
 
-    public String weekNames[] = {"Su","Mo","Tu","We","Th","Fr","St"};
-    public String monthNames[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    public String[] weekNames = {"Su","Mo","Tu","We","Th","Fr","St"};
+    public String[] monthNames = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
     public static final int NUM_OF_WEEKDAYS = 7;
     public static final int MAX_NUM_OF_WEEKS = 5;
