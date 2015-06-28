@@ -2,7 +2,19 @@
 Library of date picker dialog for Android
 
 ##Usage
-Import /calendarpicker as a module
+
+Add repository to your gradle file
+```gradle
+repositories {
+    maven { url {'https://raw.github.com/takuseno/CalendarPicker/master/repository'}}
+}
+
+dependencies {
+    compile 'jp.gr.java_conf.androtaku.calendarpicker:calendarpicker:1.0.0'
+}
+```
+
+In your Java Code
 ```java
 CalendarPicker calendarPicker = new CalendarPicker();
 calendarPicker.setDateSelectedListenr(new DateSelectedListener() {
