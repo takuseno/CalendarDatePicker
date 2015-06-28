@@ -34,7 +34,7 @@ uploadArchives {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
             pom.version = '1.0.0'
-            pom.groupId = 'com.takuseno.calendarpicker'
+            pom.groupId = 'jp.gr.java_conf.androtaku.calendarpicker'
             pom.artifactId = 'calendarpicker'
         }
     }

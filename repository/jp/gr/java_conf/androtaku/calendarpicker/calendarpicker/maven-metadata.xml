@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>com.takuseno.calendarpicker</groupId>
+  <groupId>jp.gr.java_conf.androtaku.calendarpicker</groupId>
   <artifactId>calendarpicker</artifactId>
   <version>1.0.0</version>
   <versioning>
     <versions>
       <version>1.0.0</version>
     </versions>
-    <lastUpdated>20150627033358</lastUpdated>
+    <lastUpdated>20150628014110</lastUpdated>
   </versioning>
 </metadata>
